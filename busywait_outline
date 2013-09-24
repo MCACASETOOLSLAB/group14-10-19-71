@@ -1,0 +1,46 @@
+BUSY WAIT:
+
+let us consider that there is only one shop in the entire city. so all the
+customers would wait for the availability of the chairs int the shop. for that
+they repeatedly check for the chairs and keep waiting untill the chair is
+available. this is known as busy waiting
+
+this can be implemented as follows:
+
+
+
+#define chairs n
+void barber(void)
+{
+while(TRUE)
+{
+down(&customers);
+down(&mutex);
+--waiting;
+up(&barber);
+up(&mutex);
+cut_hair();
+}
+}
+
+void customer(void)
+{
+down(&mutex);
+if(waiting<chairs)
+{
+++waiting;
+up(&customers);
+up(&mutex);
+down(&barber);
+get_haircut();
+}
+else
+up(&mutex);
+}
+}
+
+
+SPIN LOCK:
+
+ a spinlock is a lock which causes a thread trying to acquire it to simply wait
+in a loop ("spin") while repeatedly checking if the lock is available
