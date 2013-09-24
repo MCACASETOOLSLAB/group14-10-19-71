@@ -1,0 +1,53 @@
+here we can consider two semaphores
+1. barber semaphore
+2. customer semaphore
+
+as a customer enters the shop, it sends a signal to the barber semaphore to wake
+ him up.
+
+
+ int custCount=0;
+ semaphore barber(0);
+ semaphore customer(0);
+
+ mutex m(1);
+ mutex custmutex(1);
+
+ int serve();
+ int getserved();
+
+ FOR CUSTOMER:
+
+ custmutex.wait();
+ m.wait();
+    custCount++;
+       if(custCount==n)
+          barber.signal();
+else
+custmutex.signal();
+m.signal();
+customer.wait();
+getserved();
+m.wait();
+custCount--;
+if(custCount==0)
+custmutex.signal();
+m.signal();
+
+
+FOR BARBER:
+
+barber.wait();
+m.wait();
+if(custCount==n)
+serve();
+customer.signal(n);
+else
+m.signal()
+the barber can serve only one customer at a time so we can infer that the
+customers are in the critical section.
+
+they follow mutual exclusion i.e. while one customer is being served(executed)
+no other customer can be served. also we can say that the customers are in
+critical section.
+
