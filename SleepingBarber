@@ -1,0 +1,36 @@
+import javax.swing.*;     // For JFrame
+import java.awt.*;       // For Color and Container
+
+public class SleepingBarber {
+	
+	public static void main(String[] args) {
+		
+	   Customer customer;
+        Barber barber;
+
+        JFrame myMainWindow = new JFrame();
+        myMainWindow.setTitle("Dr. Webster's Sleeping Barber Problem CS380 Program");
+        myMainWindow.setSize(700, 700);
+        myMainWindow.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        Container mainpane = myMainWindow.getContentPane();
+        
+        
+      //create all objects here
+      //
+       
+        customer = new Customer("Customer",                    );
+        barber = new Barber("Barber",                          );
+        MyPanelTop mytop = new MyPanelTop(customer, barber);
+        customer.setMyTopPanel(mytop);
+        barber.setMyTopPanel(mytop);
+        wr.setPanelTop(mytop);
+        
+        mytop.setPreferredSize(new Dimension(200, 130));
+        mainpane.add(mytop, BorderLayout.PAGE_START);
+        mainpane.add(mycanvas, BorderLayout.CENTER);
+        myMainWindow.setVisible(true);
+
+
+	}
+
+}
